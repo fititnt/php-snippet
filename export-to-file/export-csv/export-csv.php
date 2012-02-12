@@ -1,33 +1,19 @@
 <?php
 
 /**
- * @todo rewrite this entire snippet to use at least, DBO getQuery and JDocument
- * Seriously. (fititnt, 2012-02-12 15:01)
+ * @todo This script was changed and still not tested. Later I will test and fix
+ * it when have time to do it (fititnt, 2012-02-12 15:22)
  */
 
+/******************************    Change me   ********************************/
 
+//Database configuration
+$host = 'localhost';
+$db = 'db_name';//db_name
+$user = 'root';//MySQL User
+$password = '';//MySQL User password
+$query = 'SELECT *  FROM table_name';//Query to take data
 
-/* JoomlaFox! Code Snippet to export Joomla table as .csv, Version 1.0, 2009-12-05
- * by Emerson Rocha Luiz - Licenced by Creative Commons By 3.0 
- * http://www.fititnt.org/codigo/joomlafox/export-csv.html */
-
-
-$joomla_table = 'users'; //Edit for one simple table export (no need table prefix)
-$query = ""; // Edit here if you want COMPLEX selects from table(s)/especific fields
-//TODO: make this code a bit more 'Joomla Framework Like'
-$app = JFactory::getApplication();
-$table = $app->getCfg('dbprefix') . $joomla_table;
-if (!$query) {
-	$query = "select * from $table";
-}
-$host = $app->getCfg('host');
-$db = $app->getCfg('db');
-$user = $app->getCfg('user');
-$password = $app->getCfg('password');
-$myquery = mysql_query($query);
-$fields_cnt = mysql_num_fields($myquery);
-$time = date('m.d.y-H.i.s');
-$filenameoutput = "JFoxCSV-{$joomla_table}_{$time}";
 //Output CSV Options
 $line_terminated = "\n";
 $field_terminated = ",";
@@ -35,8 +21,16 @@ $enclosed = '"';
 $escaped = '\\';
 $export_schema = '';
 
+/******************************    Change me   ********************************/
+
+$myquery = mysql_query($query);
+$fields_cnt = mysql_num_fields($myquery);
+$time = date('m.d.y-H.i.s');
+$filenameoutput = "{$table}_{$time}";
+
 for ($i = 0; $i < $fields_cnt; $i++) {
-	$l = $enclosed . str_replace($enclosed, $escaped . $enclosed, stripslashes(mysql_field_name($myquery, $i))) . $enclosed;
+	$l = $enclosed . str_replace($enclosed, $escaped . $enclosed, 
+			stripslashes(mysql_field_name($myquery, $i))) . $enclosed;
 	$export_schema .= $l;
 	$export_schema .= $field_terminated;
 }
@@ -50,7 +44,8 @@ while ($row = mysql_fetch_array($myquery)) {
 				$export_schema .= $row[$j];
 			} else {
 				$export_schema .= $enclosed .
-						str_replace($enclosed, $escaped . $enclosed, $row[$j]) . $enclosed;
+						str_replace($enclosed, $escaped . $enclosed, $row[$j]) 
+						. $enclosed;
 			}
 		} else {
 			$export_schema .= '';
@@ -69,5 +64,4 @@ header("Content-type: application/csv");
 header("Content-Disposition: attachment; filename={$filenameoutput}.csv");
 echo $output;
 exit;
-$app->close();
 ?>
