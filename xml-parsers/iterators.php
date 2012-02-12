@@ -2,7 +2,7 @@
 
 echo '<pre>';
 
-$sxi = new SimpleXMLIterator(file_get_contents('content.xml'));
+$sxi = new SimpleXMLIterator(file_get_contents('../_data/manifest-content.xml'));
 
 
 echo "\t\t\t1: SimpleXMLIterator / iterator_to_array, simple:\n\n";
