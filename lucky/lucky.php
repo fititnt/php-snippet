@@ -6,7 +6,7 @@
  * Exemplo: "chance(25)" retornaria verdadeiro com 25% de provabilidade
  * return       boolean
  */
-function chance($chance){
+function lucky($chance){
     if(rand (1,100) <= $chance){
         return TRUE;
     } else {
