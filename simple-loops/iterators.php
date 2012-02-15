@@ -72,9 +72,9 @@ while ($it->valid()) {
 	echo ', $it->current(): ' . $it->current();
 	echo ', $it->valid(): ' . $it->valid();
 
-	$it->next(); 
-	
-	
+	$it->next();
+
+
 	if ($it->key() === 6 && !isset($lastloop)) { //6 => 'f'
 		//Restart loop
 		$it->rewind(); //5 => 'e'
