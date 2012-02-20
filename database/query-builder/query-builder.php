@@ -10,6 +10,9 @@
 /**
  * This function implement the logit of how to use implode and a few ifs to
  * build queries more easy to undestand for complex cases.
+ * 
+ * ***Still not finished***, so just wait some more days. Ok, maybe not just few
+ * days xD
  *
  * @return string 
  */
